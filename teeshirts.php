@@ -29,7 +29,7 @@ $formatteurMontants = new NumberFormatter($langue, NumberFormatter::CURRENCY);
 		<h1><?= $_->titrePage ?></h1>
 		<form class="controle">
 			<div class="filtre">
-				<label for="filtre">Filtrer par thème : </label>
+				<label for="filtre">Filtrer par thèmes : </label>
 				<select name="filtre" id="filtre">
 					<option value="tous">Tous les produits</option>
 					<?php foreach($themes as $codeTheme => $nomTheme) : ?>
