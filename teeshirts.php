@@ -33,8 +33,8 @@ $formatteurMontants = new NumberFormatter($langue, NumberFormatter::CURRENCY);
 				<label for="filtre">Filtrer par thèmes : </label>
 				<select name="filtre" id="filtre">
 					<option value="tous">Tous les produits</option>
-					<?php foreach($themes as $codeTheme => $nomTheme) : ?>
-								<option value="<?=$codeTheme;?>"><?= $nomTheme; ?></option>
+					<?php foreach($themes as $unTheme) : ?>
+								<option value="<?=$unTheme->id;?>"><?= $unTheme->nom; ?></option>
 					<?php endforeach; ?>
 
 				</select>
