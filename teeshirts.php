@@ -14,12 +14,13 @@ include('parties-communes/entete.php');
 //gerer interactoviter filre de tri
 //capturer la saisie util
 
-$tri = (isset($_GET['tri'])) ? $_GET['tri'] : 'aleatoire';
+$tri = (isset($_GET['tri'])) ?? 'aleatoire';
+$filtre = (isset($_GET['filtre'])) ? $_GET['filtre'] : 'tous';
 //passer valeur de tri a la fonction
 
 // Intégrer le fichier JSON contenant le catalogue des produits
-[$theme, $produits] = obtenirCatalogue($page, $langue, $tri);
-
+$themes = obtenirTheme();
+$produits = obtenirProduits($page, $tri, $filtre);
 // Formatteur des montants d'argent
 $formatteurMontants = new NumberFormatter($langue, NumberFormatter::CURRENCY);
 /** @var stdClass $_ : raccourci pour la section texte de cette page. */
