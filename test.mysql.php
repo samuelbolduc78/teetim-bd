@@ -19,9 +19,10 @@ $resultat = $cnx -> query($requeteThemeProduit);
 <body>
     <h2> 10 produits </h2>
     <ul>
-        <?php while($unroduit = $resultat->fetch_assoc()): ?>
-        <li><?= $unroduit['nom']; ?> (<?= $unroduit['prix']; ?>)</li>
+        <?php while($unproduit = $resultat->fetch_object()): ?>
+        <li><?= $unproduit['nom']; ?> (<?= $unproduit->prix; ?>)</li>
         <?php endwhile; ?>
+        <!-- assoc petit tableau objet un  -->
     </ul>
 </body>
 </html>
