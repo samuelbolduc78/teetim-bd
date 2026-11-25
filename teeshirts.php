@@ -14,13 +14,13 @@ include('parties-communes/entete.php');
 //gerer interactoviter filre de tri
 //capturer la saisie util
 
-$tri = (isset($_GET['tri'])) ?? 'RAND()';
-$filtre = (isset($_GET['filtre'])) ? $_GET['filtre'] : 'tous';
+$tri = $_GET['tri'] ?? 'RAND()';
+$filtre = $_GET['filtre'] ?? 'tous';
 //passer valeur de tri a la fonction
 
 // Intégrer le fichier JSON contenant le catalogue des produits
 $themes = obtenirTheme();
-$produits = obtenirProduits($page, $tri, $filtre);
+$produits = obtenirProduits($page, $filtre, $tri);
 // Formatteur des montants d'argent
 $formatteurMontants = new NumberFormatter($langue, NumberFormatter::CURRENCY);
 /** @var stdClass $_ : raccourci pour la section texte de cette page. */
@@ -34,7 +34,7 @@ $formatteurMontants = new NumberFormatter($langue, NumberFormatter::CURRENCY);
 				<select name="filtre" id="filtre">
 					<option value="tous">Tous les produits</option>
 					<?php foreach($themes as $unTheme) : ?>
-								<option <?= ($filtre === $unTheme->id) ? 'selected' : ""; ?> value="<?=$unTheme->id;?>"><?= $unTheme->nom; ?></option>
+								<option <?= ($filtre === $unTheme["id"]) ? 'selected' : ""; ?> value="<?=$unTheme["id"];?>"><?= $unTheme["nom"]; ?></option>
 					<?php endforeach; ?>
 
 				</select>
@@ -60,7 +60,8 @@ $formatteurMontants = new NumberFormatter($langue, NumberFormatter::CURRENCY);
 		<?php foreach ($produits as $prd) : ?>
 			<div class="produit">
 				<span class="image">
-					<img src="images/produits/teeshirts/<?= $prd->fichier_image; ?> alt="<?= $prd->nom; ?>">
+					<img src="images/produits/teeshirts/<?= ($prd->fichier_image!=="")? $prd->fichier_image : 'vert.png'; ?>
+					">
 				</span>
 				<span class="nom"><?= $prd->nom; ?></span>
 				<span class="prix"><?= $formatteurMontants->formatCurrency($prd->prix, 'CAD'); ?></span>

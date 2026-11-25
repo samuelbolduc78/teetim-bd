@@ -7,14 +7,21 @@
 use LDAP\Result;
 
 function obtenirTheme(){
-	$cnx = new mysqli('db', 'teetim', 'teetim', 'teetim');
-	$resultat = $cnx -> query("SELECT * FROM theme");
-	// return $resultat->fetch_all(MYSQLI_ASSOC);
-	$theme = [];
-	while($uneLigne = $resultat->fetch_object()){
-	$theme[] = $uneLigne;
+	$test = 3;
+	$dsn = "mysql:host=db;dbname=teetim;chartset=utf8mb4";
+	$cnx = new PDO($dsn, "teetim", "teetim", [
+		PDO::ATTR_ERRMODE => PDO::ERRMODE_SILENT,
+		PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+	]);
+	$stmt = $cnx->prepare("SELECT * FROM theme WHERE id>?");
+	if ($stmt === false) {
+		return false;
 	}
-	return $theme;
+	$resultat = $stmt->execute([$test]);
+	if($resultat) {
+		return $stmt-> fetchAll();
+	}
+	return [];
 }
 /**
  * return array tableau avev obj representant theme
@@ -32,7 +39,7 @@ function obtenirProduits($categorie, $critfiltre, $critereTri )
 {
 	$cnx = new mysqli('db', 'teetim', 'teetim', 'teetim');
 	$clausewhere = $critfiltre === "tous" ? "" : "WHERE thm_id=$critfiltre";
-	$sql = "SELECT * FROM produit $clausewhere ORDER BY $critfiltre";
+	$sql = "SELECT * FROM produit $clausewhere ORDER BY $critereTri";
 	$resultat = $cnx -> query($sql);
 	$produits = [];
 	while ($prod = $resultat->fetch_object()){

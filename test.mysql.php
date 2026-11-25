@@ -1,6 +1,6 @@
 <?php 
 $cnx = new mysqli('db', 'teetim', 'teetim', 'teetim');
-
+$cnx ->select_db('teetim');
 //ecrire requete sql
 $requeteThemeProduit = "SELECT nom, prix FROM produit LIMIT 10"; 
 
