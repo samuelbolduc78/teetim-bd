@@ -4,6 +4,11 @@ include("lib/i18n.lib.php");
 /*****************************************
 		Tableau des codes de langues disponibles
  *****************************************/
+//inclure li sql
+
+include("lib/sql.lib.php");
+//obtenir connexion site
+$cnx = connexion();
 $languesDispo = obtenirlangueDisponible();
 
 /*****************************

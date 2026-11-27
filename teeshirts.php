@@ -19,8 +19,8 @@ $filtre = $_GET['filtre'] ?? 'tous';
 //passer valeur de tri a la fonction
 
 // Intégrer le fichier JSON contenant le catalogue des produits
-$themes = obtenirTheme();
-$produits = obtenirProduits($page, $filtre, $tri);
+$themes = obtenirTheme($cnx);
+$produits = obtenirProduits($cnx);
 // Formatteur des montants d'argent
 $formatteurMontants = new NumberFormatter($langue, NumberFormatter::CURRENCY);
 /** @var stdClass $_ : raccourci pour la section texte de cette page. */
@@ -34,7 +34,7 @@ $formatteurMontants = new NumberFormatter($langue, NumberFormatter::CURRENCY);
 				<select name="filtre" id="filtre">
 					<option value="tous">Tous les produits</option>
 					<?php foreach($themes as $unTheme) : ?>
-								<option <?= ($filtre === $unTheme["id"]) ? 'selected' : ""; ?> value="<?=$unTheme["id"];?>"><?= $unTheme["nom"]; ?></option>
+								<option <?= ($filtre === $unTheme->id) ? 'selected' : ""; ?> value="<?=$unTheme->id;?>"><?= $unTheme->nom; ?></option>
 					<?php endforeach; ?>
 
 				</select>
