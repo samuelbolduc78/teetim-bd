@@ -20,7 +20,7 @@ $filtre = $_GET['filtre'] ?? 'tous';
 
 // Intégrer le fichier JSON contenant le catalogue des produits
 $themes = obtenirTheme($cnx);
-$produits = obtenirProduits($cnx);
+$produits = obtenirProduits($cnx, $filtre, $tri);
 // Formatteur des montants d'argent
 $formatteurMontants = new NumberFormatter($langue, NumberFormatter::CURRENCY);
 /** @var stdClass $_ : raccourci pour la section texte de cette page. */

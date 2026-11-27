@@ -14,7 +14,7 @@ $dsn = "mysql:host=".HOTE.";dbname=".BD.";chartset=utf8mb4";
 		PDO::ATTR_ERRMODE => PDO::ERRMODE_SILENT,
 		PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ
 	]);
-    return connexion();
+    return $cnx;
 };
 /**
  * exetcute requert param
